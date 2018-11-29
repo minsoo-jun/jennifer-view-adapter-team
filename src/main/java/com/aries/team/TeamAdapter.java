@@ -41,7 +41,6 @@ public class TeamAdapter implements EventHandler {
                 message = new Message(teamProperties, this.jenniferEventToString(eventModel), eventModel.eventLevel);
                 client = new Client(message);
                 client.push();
-                LogUtil.info("Msg" + message.getText());
             }
         } catch (Exception e) {
             LogUtil.error(e.getMessage());
