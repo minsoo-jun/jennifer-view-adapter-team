@@ -1,44 +1,34 @@
-## Overview
-This adapter will send EVENT notification to hipchat room.
-[Jennifersoft github](https://github.com/jennifersoft)
-
 ## Getting started
-You must modify the configuration file of the view server. (conf/server_view.conf)
-```
-adapter_class_path = /usr/local/jennifer/jennifer5/server.view/ext/email.adapter/jennifer-view-adapter-hipchat.jar
-adapter_config_path = /usr/local/jennifer/jennifer5/server.view/ext/team.adapter/adapter.properties
-adapter_event_class_name = adapter.jennifer.team.TeamAdapter
-```
 
-## Configuration file
-The configuration file looks like the following
-```
-# Set Microsoft Team 'Incoming Webhook' URL for normal message
-url https://outlook.office.com/webhook/aeae5034-6442-4cb4-ba35-97ed774ea633@53a8b0d9-d900-48cc-9d7e-5935dc8d5b17/IncomingWebhook/23fcd89a59bb4541ac028ac4211ed160/2a8c4607-13e0-407c-bfea-32c566b7c64b
+Execute the following in the Jennifer management screen.
 
-# Set Microsoft Team 'Incoming Webhook' URL for Fatal message
-url_fatal https://outlook.office.com/webhook/aeae5034-6442-4cb4-ba35-97ed774ea633@53a8b0d9-d900-48cc-9d7e-5935dc8d5b17/IncomingWebhook/3f12522575af4eba9c23f236173aace1/2a8c4607-13e0-407c-bfea-32c566b7c64b
+ 1. Extension & Notice > Adapter and Plugin.
+ 2. Select the Adapter tab.
+ 3. Click the Add button.
+ 4. Select the 'EVENT' type.
+ 5. Enter the 'team' ID.
+ 6. Enter the path to the 'dist/adapter-team-1.0.0.jar' file or upload it yourself.
+ ![screen shot 2018-11-29 at 14 01 43](https://user-images.githubusercontent.com/2956728/49200280-702c2d00-f3df-11e8-9f2e-6b06aaa644be.png)
+ 7. set token and url to options
+ ![screen shot 2018-11-29 at 14 09 17](https://user-images.githubusercontent.com/2956728/49200485-65be6300-f3e0-11e8-8559-a36c167c95d4.png)
+ 8. Restart jennifer view instance.
+ 
+## How to use options
 
-# Set proxy setting
-# Example : "on" or "off"
-# Example : on -> user proxy, off -> direct access
-proxy_on=off
-proxy_host=proxy-host
-proxy_port=9999
+Plugin options are shown in the table below.
 
-```
+| Key           | Value | Remark |
+| ------------- |:-------------:|:-------------:|
+| url |  https://outlook.office.com/webhook/aeae5....... | notification 1 |
+| url_fatal |  https://outlook.office.com/webhook/aeae5....... | notification 2 |
+| proxy_on | off | "on" or "off" |
+| proxy_host | my.proxy.com | proxy server host |
+| proxy_prot | 3120 | proxy port number |
 
-* Make sure to replace the Microsoft Team Incoming Webhook property with the correct value
-
-## version history
-2018-10-24 : v1.0.0 default functions. 
-
-## For develop
-Add class path
-```
-{{ VIEW_SERVER_HOME }}/lib
-```
-For avoid "@Override" error in TeamAdapter
-```
-Project language level: 6 - @Override in interfaces
-```
+## Supported version
+ 
+Different versions of the server support different plug-in versions.
+ 
+| Plugin version | Jennifer server version | Java version |
+| ------------- |-------------|-------------|
+| 1.0.0       | Greater than or equal to version 5.4.0.0 | 1.8
