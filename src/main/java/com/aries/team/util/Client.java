@@ -1,8 +1,8 @@
-package adapter.jennifer.team.util;
+package com.aries.team.util;
 
-import adapter.jennifer.team.entity.Message;
-import adapter.jennifer.team.entity.Prop;
-import com.jennifersoft.view.adapter.util.LogUtil;
+import com.aries.extension.util.LogUtil;
+import com.aries.team.entity.Message;
+import com.aries.team.entity.Prop;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -42,11 +42,10 @@ public class Client {
      * @return Return either "ok" if message was sent, or null if message was not sent or an exception occured.
      */
     public String push() {
-        LogUtil.info("Client : push()");
+
         HttpURLConnection connection = null;
         try {
             Prop prop = this.message.getProp();
-            LogUtil.info("url :" + prop.getUrl_fatal());
             URL url = new URL(prop.getUrl());
             if ("WARNING".equals(message.getEventLevel())){
                 url = new URL(prop.getUrl());
@@ -54,14 +53,13 @@ public class Client {
                 url = new URL(prop.getUrl_fatal());
             }
 
-
             if ("on".equals(prop.getIsProxy())) {
                 Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(prop.getProxyHost(), Integer.parseInt(prop.getProxyPort())));
                 connection = (HttpURLConnection) url.openConnection(proxy);
             } else {
                 connection = (HttpURLConnection) url.openConnection();
             }
-            LogUtil.info("url :" + url);
+
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setConnectTimeout(CONNECTION_TIME_OUT);
@@ -70,9 +68,6 @@ public class Client {
             connection.setDoOutput(true);
 
             String payload = message.getText();
-            LogUtil.info("payload : " + payload);
-            //debug
-            //payload ="{\"text\":\"hello\"}";
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());
             out.writeBytes(payload);
 
@@ -89,7 +84,7 @@ public class Client {
             reader.close();
             return response.toString();
         } catch (Exception ex) {
-            LogUtil.error("Error while pushing message. Reason : " + ex.toString());
+            LogUtil.error(ex.getMessage());
             return null;
         } finally {
             if (connection != null)

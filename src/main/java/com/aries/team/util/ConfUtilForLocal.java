@@ -1,25 +1,31 @@
-package adapter.jennifer.team.util;
+package com.aries.team.util;
 
-import adapter.jennifer.team.entity.Prop;
-import com.jennifersoft.view.adapter.util.LogUtil;
-import com.jennifersoft.view.config.ConfigValue;
+import com.aries.team.entity.Prop;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Load adapter configuration from configuration file
  */
-public class ConfUtil {
+public class ConfUtilForLocal {
 
     /**
      * Properties instances to load the configuration
      */
     private static Properties properties = null;
 
+    private static final String TEAM_URL = "url";
+
+    private static final String TEAM_FATAL_URL = "url_fatal";
+
+    private static final String PROXY_ON = "proxy_on" ;
+
+    private static final String PROXY_HOST ="proxy_host";
+
+    private static final String PROXY_PORT ="proxy_port";
     /**
      * Initialize the Properties object and load the configuration from the configuration file
      * The configuration file name and path must be set in <b>VIEW_SERVER_HOME/conf/server_view.conf<b> using the
@@ -28,17 +34,14 @@ public class ConfUtil {
     public static void load() {
         properties = new Properties();
         FileInputStream in = null;
-        String path = ConfigValue.adapter_config_path;
-        if (isEmpty(path)) {
-            path = "/usr/local/jennifer/jennifer5/server.view/ext/team.adapter/adapter.properties";
-        }
+        String path = "/usr/local/jennifer/jennifer5/server.view/ext/team.adapter/adapter.properties";
         try {
             if (path != null) {
                 in = new FileInputStream(path);
                 properties.load(in);
             }
         } catch (IOException io) {
-            LogUtil.error("Failed to load configuration file: " + io.toString());
+            System.out.println(io.getStackTrace());
         }
     }
 
@@ -71,12 +74,11 @@ public class ConfUtil {
      */
     public static Prop getTeamProperties() {
         Prop prop = new Prop();
-        prop.setUrl(getValue("url"));
-        prop.setUrl_fatal(getValue("url_fatal"));
-        prop.setIsProxy(getValue("proxy_on"));
-        prop.setProxyHost(getValue("proxy_host"));
-        prop.setProxyPort(getValue("proxy_port"));
-        LogUtil.error("getTeamProperties : setted");
+        prop.setUrl(getValue(TEAM_URL));
+        prop.setUrl_fatal(getValue(TEAM_FATAL_URL));
+        prop.setIsProxy(getValue(PROXY_ON));
+        prop.setProxyHost(getValue(PROXY_HOST));
+        prop.setProxyPort(getValue(PROXY_PORT));
         return prop;
     }
 }

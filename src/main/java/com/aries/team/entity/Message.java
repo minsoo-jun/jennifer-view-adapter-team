@@ -1,6 +1,4 @@
-package adapter.jennifer.team.entity;
-
-import org.json.JSONObject;
+package com.aries.team.entity;
 
 /**
  * Created by minsoo.jun on 2018-10-24.
