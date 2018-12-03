@@ -72,7 +72,7 @@ public class ConfUtilForLocal {
      *
      * @return
      */
-    public static Prop getTeamProperties() {
+    public static Prop getLocalTeamProperties() {
         Prop prop = new Prop();
         prop.setUrl(getValue(TEAM_URL));
         prop.setUrl_fatal(getValue(TEAM_FATAL_URL));

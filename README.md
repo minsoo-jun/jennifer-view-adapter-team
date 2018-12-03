@@ -1,3 +1,7 @@
+## Overview
+This adapter will send EVENT notification to mirosoft team.
+[Jennifersoft github](https://github.com/jennifersoft
+
 ## Getting started
 
 Execute the following in the Jennifer management screen.

@@ -59,7 +59,11 @@ public class Client {
             } else {
                 connection = (HttpURLConnection) url.openConnection();
             }
-
+            /*
+            LogUtil.info("proxy_on:" + prop.getIsProxy());
+            LogUtil.info("proxyHost:" + prop.getProxyHost());
+            LogUtil.info("proxyPort:" + prop.getProxyPort());
+            */
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setConnectTimeout(CONNECTION_TIME_OUT);

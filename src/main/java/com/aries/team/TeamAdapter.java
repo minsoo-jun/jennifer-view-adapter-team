@@ -33,12 +33,12 @@ public class TeamAdapter implements EventHandler {
             teamProperties = ConfUtil.getTeamProperties();
             // for local testing.
             if(teamProperties.getUrl() == null){
-                teamProperties = ConfUtilForLocal.getTeamProperties();
+                teamProperties = ConfUtilForLocal.getLocalTeamProperties();
             }
 
             for (int i = 0; i < eventData.length; i++) {
                 eventModel = (EventData) eventData[i];
-                message = new Message(teamProperties, this.jenniferEventToString(eventModel), eventModel.eventLevel);
+                message = new Message(teamProperties, this.jenniferEventToString(eventModel, teamProperties), eventModel.eventLevel);
                 client = new Client(message);
                 client.push();
             }
@@ -52,7 +52,7 @@ public class TeamAdapter implements EventHandler {
      * @param eventModel
      * @return String message
      */
-    private String jenniferEventToString(EventData eventModel) {
+    private String jenniferEventToString(EventData eventModel,Prop teamProperties) {
         StringBuilder messageBody = new StringBuilder();
         String newLine = "</br>";
         messageBody.append("{\"text\":\"");
@@ -60,7 +60,7 @@ public class TeamAdapter implements EventHandler {
         messageBody.append("Here are some additional details").append(newLine);
         messageBody.append("--------------------------------------------------------------- ").append(newLine);
         messageBody.append("Affected Domain [ID:NAME]").append(newLine);
-        messageBody.append("Jennifer Server: <a href='http://" + System.getenv("hostname") + ":7900/dashboard/realtimeAdmin'>" + System.getenv("hostname") + "</a>").append(newLine);
+        messageBody.append("Jennifer Server: <a href='" + teamProperties.getJennifer_url() + "'>" + teamProperties.getJennifer_url() + "</a>").append(newLine);
         messageBody.append(eventModel.domainId + ":" + eventModel.domainName + "").append(newLine);
         messageBody.append("Affected Instance [ID:NAME]").append(newLine);
         messageBody.append(eventModel.instanceId + ":" + eventModel.instanceName).append(newLine);

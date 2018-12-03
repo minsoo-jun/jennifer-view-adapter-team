@@ -6,6 +6,7 @@ package com.aries.team.entity;
 public class Prop {
     private String url;
     private String url_fatal;
+    private String jennifer_url;
     private String isProxy;
     private String proxyHost;
     private String proxyPort;
@@ -48,5 +49,13 @@ public class Prop {
 
     public void setProxyPort(String proxyPort) {
         this.proxyPort = proxyPort;
+    }
+
+    public String getJennifer_url() {
+        return jennifer_url;
+    }
+
+    public void setJennifer_url(String jennifer_url) {
+        this.jennifer_url = jennifer_url;
     }
 }

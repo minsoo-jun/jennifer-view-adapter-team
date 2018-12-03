@@ -27,6 +27,8 @@ public class ConfUtil {
 
     private static final String PROXY_PORT ="proxy_port";
 
+    private static final String JENNIFER_URL = "jennifer_url";
+
     /**
      * Get a configuration value using the provided key
      * @param key configuration key. Set this key value in the adapter configuration menu in JENNIFER client.
@@ -48,6 +50,7 @@ public class ConfUtil {
         prop.setIsProxy(getValue(PROXY_ON));
         prop.setProxyHost(getValue(PROXY_HOST));
         prop.setProxyPort(getValue(PROXY_PORT));
+        prop.setJennifer_url(getValue(JENNIFER_URL));
         return prop;
     }
 }
